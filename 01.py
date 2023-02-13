@@ -9,6 +9,7 @@ class Solution:
         else:
             return True
 
+
     def isUnique(self, astr: str) -> bool:
         """
         限制：
@@ -27,6 +28,7 @@ class Solution:
         for s in astr:
             hash_dic[s] += 1
 
+        # 这里还有优化空间，这样写方便些
         if max(hash_dic.values()) > 1:
             return False
         else:
