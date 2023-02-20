@@ -1,6 +1,7 @@
-# https://leetcode.cn/problems/delete-middle-node-lcci/?favorite=xb9lfcwi
+# https://leetcode.cn/problems/palindrome-linked-list-lcci/
 
 # Definition for singly-linked list.
+
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -43,28 +44,29 @@ class LinkList:
 
 
 class Solution:
-    def deleteNode(self, node):
-        """
-        :type node: ListNode
-        :rtype: void Do not return anything, modify node in-place instead.
-        """
-        p = node.next
-        node.val = p.val
-        node.next = p.next
-        del p
+    def isPalindrome(self, head: ListNode) -> bool:
+        cur = head
+        length = 0
+        while cur:
+            length += 1
+            cur = cur.next
+        fast, low = head, head
+        length = length // 2 if length % 2 == 0 else length // 2 + 1
+        for i in range(length):
+            fast = fast.next
+        before, after = [], []
+        while fast:
+            before.append(low.val)
+            after.append(fast.val)
+            fast, low = fast.next, low.next
+        return before == after[::-1]
 
 
 if __name__ == '__main__':
-    demo = LinkList()
-    for i in range(10):
-        demo.append(i)
-    print(demo)
-    node = demo.get_head()
-    for j in range(8):
-        node = node.next
-    print(node.val)
+    l = LinkList()
+    arr = [1, 4, -1, -1, 4, 1]
+    for item in arr:
+        l.append(item)
+    print(l)
     test = Solution()
-    test.deleteNode(node)
-    demo.update_length()
-    print(demo)
-
+    print(test.isPalindrome(l.get_head()))

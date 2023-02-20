@@ -1,6 +1,7 @@
-# https://leetcode.cn/problems/delete-middle-node-lcci/?favorite=xb9lfcwi
+# https://leetcode.cn/problems/partition-list-lcci/
 
 # Definition for singly-linked list.
+
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -43,28 +44,33 @@ class LinkList:
 
 
 class Solution:
-    def deleteNode(self, node):
-        """
-        :type node: ListNode
-        :rtype: void Do not return anything, modify node in-place instead.
-        """
-        p = node.next
-        node.val = p.val
-        node.next = p.next
-        del p
+    def partition(self, head: ListNode, x: int) -> ListNode:
+        smalls = ListNode(-1)
+        bigs = ListNode(-1)
+        p, q = smalls, bigs
+
+        cur = head
+        while cur:
+            if cur.val < x:
+                p.next = cur
+                p = p.next
+            else:
+                q.next = cur
+                q = q.next
+            cur = cur.next
+
+        p.next = bigs.next
+        q.next = None
+        return smalls.next
 
 
 if __name__ == '__main__':
     demo = LinkList()
-    for i in range(10):
-        demo.append(i)
+    arr = [1, 4, 3, 2, 5, 2]
+    # arr = [2, 1, 3]
+    for item in arr:
+        demo.append(item)
     print(demo)
-    node = demo.get_head()
-    for j in range(8):
-        node = node.next
-    print(node.val)
     test = Solution()
-    test.deleteNode(node)
-    demo.update_length()
+    test.partition(demo.get_head(), 3)
     print(demo)
-

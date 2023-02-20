@@ -1,6 +1,7 @@
-# https://leetcode.cn/problems/delete-middle-node-lcci/?favorite=xb9lfcwi
+# https://leetcode.cn/problems/sum-lists-lcci/
 
 # Definition for singly-linked list.
+
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -43,28 +44,42 @@ class LinkList:
 
 
 class Solution:
-    def deleteNode(self, node):
-        """
-        :type node: ListNode
-        :rtype: void Do not return anything, modify node in-place instead.
-        """
-        p = node.next
-        node.val = p.val
-        node.next = p.next
-        del p
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) : # -> ListNode:
+        len1, len2 = 0, 0
+        num1, num2 = 0, 0
+        cur = l1
+        while cur:
+            num1 += cur.val * (10**len1)
+            len1 += 1
+            cur = cur.next
+        cur = l2
+        while cur:
+            num2 += cur.val * (10**len2)
+            len2 += 1
+            cur = cur.next
+        res = ListNode(-1)
+        cur = res
+        num = num1 + num2
+        while num:
+            cur.next = ListNode(num % 10)
+            num //= 10
+            cur = cur.next
+        return res.next if res.next else ListNode(0)
 
 
 if __name__ == '__main__':
-    demo = LinkList()
-    for i in range(10):
-        demo.append(i)
-    print(demo)
-    node = demo.get_head()
-    for j in range(8):
-        node = node.next
-    print(node.val)
-    test = Solution()
-    test.deleteNode(node)
-    demo.update_length()
-    print(demo)
+    l1 = LinkList()
+    l2 = LinkList()
 
+    arr1 = [7, 1, 6]
+    arr2 = [5, 9, 2]
+
+    for item in arr1:
+        l1.append(item)
+    for item in arr2:
+        l2.append(item)
+
+    print(l1)
+    print(l2)
+    test = Solution()
+    test.addTwoNumbers(l1.get_head(), l2.get_head())
