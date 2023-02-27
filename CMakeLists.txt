@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Interview
         # Interv01/01.cpp,
-        Interv01/06.cpp)
+        Interv01/09.cpp)
